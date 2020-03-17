@@ -16,6 +16,17 @@ var app = (function () {
         ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
         ctx.stroke();
     };
+    var drawPolygon=function(points){
+    	var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(points[0].x,points[0].y);
+        for(var i=1;i<points.length;i++){
+        	ctx.lineTo(points[i].x,points[i].y);
+        }
+        ctx.closePath();
+        ctx.fill();
+    };
     
     
     var getMousePosition = function (evt) {
@@ -65,7 +76,8 @@ var app = (function () {
         publishPoint: function(px,py){
             var pt=new Point(px,py);
             console.info("publishing point at "+pt);
-            stompClient.send("/topic/newpoint."+idConection, {},JSON.stringify({x:px,y:py}));
+            //stompClient.send("/topic/newpoint."+idConection, {},JSON.stringify({x:px,y:py}));
+            stompClient.send("/app/newpoint."+idConection, {},JSON.stringify({x:px,y:py}));
 
             //publicar el evento
         },
@@ -96,6 +108,13 @@ var app = (function () {
                      var y = cord.y;
                      //alert(x+" "+y);
                      addPointToCanvas(new Point(x,y));
+                 });
+                 stompClient.subscribe('/topic/newpolygon.'+idConection, function (eventbody) {
+                     //alert(eventbody);
+                     console.log(eventbody);
+                     var points=JSON.parse(eventbody.body).points;
+                     console.log(points);
+                     drawPolygon(points);
                  });
              });
         }
