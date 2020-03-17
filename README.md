@@ -23,25 +23,15 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
 ```
 
 #### Maven
-El programa corre con gradle, para comprobar si esta instalado desde la linea de comandos:
+El programa corre con maven, para comprobar si esta instalado desde la linea de comandos:
 
-```
->gradle -v
+```C:\Users\ASUS\Documents\universidad\ARSW\ARSW-LAB07>mvn -version
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+Maven home: C:\Users\ASUS\Documents\apache-maven-3.6.3\bin\..
+Java version: 13.0.2, vendor: Oracle Corporation, runtime: C:\Program Files\Java\jdk-13.0.2
+Default locale: es_CO, platform encoding: Cp1252
+OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 
-C:\Users\ASUS\Documents\ARSW-LAB05>gradle -v
-
-------------------------------------------------------------
-Gradle 6.2.1
-------------------------------------------------------------
-
-Build time:   2020-02-24 20:24:10 UTC
-Revision:     aacbcb7e587faa6a8e7851751a76183b6187b164
-
-Kotlin:       1.3.61
-Groovy:       2.5.8
-Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
-JVM:          1.8.0_231 (Oracle Corporation 25.231-b11)
-OS:           Windows 10 10.0 amd64
 ```
 
 #### Git
@@ -63,13 +53,13 @@ Para instalar el repositorio se instala en la ruta deseada desde git de esta for
 Para compilar el proyecto desde gradle:
 
 ```
-> gradle build
+> mvn package
 
 ```
 ## Corriendo el programa
 Para ejecutar el programa desde la linea de comandos ejecutamos nuestro proyecto de la siguiente manera:
 ```
-> gradle bootRun
+> mvn spring-boot:run
 
 ```
 A continuación comprobamos que se estan creando los puntos correctamente
