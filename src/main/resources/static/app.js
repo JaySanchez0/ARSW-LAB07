@@ -1,5 +1,5 @@
 var app = (function () {
-
+	var idConection = null;
     class Point{
         constructor(x,y){
             this.x=x;
@@ -65,7 +65,7 @@ var app = (function () {
         publishPoint: function(px,py){
             var pt=new Point(px,py);
             console.info("publishing point at "+pt);
-            stompClient.send("/topic/newpoint", {},JSON.stringify({x:px,y:py}));
+            stompClient.send("/topic/newpoint."+idConection, {},JSON.stringify({x:px,y:py}));
 
             //publicar el evento
         },
@@ -76,6 +76,28 @@ var app = (function () {
             }
             setConnected(false);
             console.log("Disconnected");
+        },
+        conectarse:function(id){
+        	 console.info('Connecting to WS...');
+             var socket = new SockJS('/stompendpoint');
+             stompClient = Stomp.over(socket);
+             idConection = id;
+             console.log("id: "+id);
+             //subscribe to /topic/TOPICXX when connections succeed
+             stompClient.connect({}, function (frame) {
+                 console.log('Connected: ' + frame);
+                 stompClient.subscribe('/topic/newpoint.'+idConection, function (eventbody) {
+                     //alert(eventbody);
+                     console.log(eventbody);
+                     //console.log(eventbody.body.x);
+                     var cord=JSON.parse(eventbody.body);
+                     console.log(eventbody);
+                     var x = cord.x;
+                     var y = cord.y;
+                     //alert(x+" "+y);
+                     addPointToCanvas(new Point(x,y));
+                 });
+             });
         }
     };
 
