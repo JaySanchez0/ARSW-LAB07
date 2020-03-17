@@ -64,7 +64,7 @@ Para ejecutar el programa desde la linea de comandos ejecutamos nuestro proyecto
 ```
 A continuación comprobamos que se estan creando los puntos correctamente
 
-![](/img/puntos1.PNG)
+![](/img/Puntos1.PNG)
 
 Y verificamos que se estan reportando los puntos creados
 
