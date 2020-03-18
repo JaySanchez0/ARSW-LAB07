@@ -117,6 +117,9 @@ var app = (function () {
                      drawPolygon(points);
                  });
              });
+        },moveEvent:function(ev){
+        	var point = getMousePosition(ev);
+        	app.publishPoint(point.x,point.y);
         }
     };
 
