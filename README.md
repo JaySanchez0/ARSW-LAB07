@@ -69,3 +69,7 @@ A continuación comprobamos que se estan creando los puntos correctamente
 Y verificamos que se estan reportando los puntos creados
 
 ![](/img/verificarPuntos.PNG)
+
+Ahora visualizamos la creación del poligono 
+
+![](/img/verificacionPoligonos.PNG)	
